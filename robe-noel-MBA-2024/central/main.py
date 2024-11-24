@@ -1,7 +1,7 @@
 import time
 import bluetooth
-import my_TCS34725
-import ble_central
+import lib.my_TCS34725 as my_TCS34725
+import lib.ble_central as ble_central
 
 from machine import Pin, I2C
 from neopixel import NeoPixel

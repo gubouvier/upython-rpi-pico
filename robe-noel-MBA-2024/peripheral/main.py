@@ -7,7 +7,7 @@ import bluetooth
 import time
 import random
 import math
-from ble_peripheral import BLESimplePeripheral
+from lib.ble_peripheral import BLESimplePeripheral
 
 from machine import Pin
 from neopixel import NeoPixel
@@ -128,7 +128,6 @@ def on_rx(v):  # v is what has been received
 def update_color(r, g, b):
      strip.fill((gammatable[r],gammatable[g],gammatable[b]))   
      strip.write()   
-     print("Color updated")      
         
 
 def main():    # This part modified to control Neopixel strip

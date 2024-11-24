@@ -44,7 +44,7 @@ def button_tcs_pressed(pin):
     global button_last_pressed_time
     global fiber_colors
     current_time = time.ticks_ms()
-    if (current_time - button_last_pressed_time) > 50:
+    if (current_time - button_last_pressed_time) > 500:
         print("Button pressed!")
         fiber_colors = increase_brightness(get_rgb())
         fiber_pixel.fill(fiber_colors)
@@ -157,7 +157,7 @@ def main():
                 print("TX failed :")
                 print(e)
 
-            time.sleep_ms(500)
+            time.sleep_ms(1000)
 
         print("Disconnected from peripheral.")
         update_status("red")

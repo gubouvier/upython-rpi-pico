@@ -1,8 +1,3 @@
-# Needs  Neopixel strip on GP15
-# Modified from Official Rasp Pi example here:
-# https://github.com/micropython/micropython/tree/master/examples/bluetooth
-# Tony Goodhew 23 June 2023
-
 import bluetooth
 import time
 import random
@@ -11,16 +6,23 @@ from lib.ble_peripheral import BLESimplePeripheral
 from machine import Pin
 from neopixel import NeoPixel
 from sections import Section, SectionMap
-from section_map import SECTION_MAP
+from section_map import SECTION_MAP_ROBE, SECTION_MAP_TUNIQUE
 
-STRIP_LEN = 10
-strip = NeoPixel(Pin(15), STRIP_LEN)
-strip.fill((0,0,0))
-strip.write()
+STRIP_LEN = 20
+strip_robe = NeoPixel(Pin(15), STRIP_LEN)
+strip_robe.fill((0,0,0))
+strip_robe.write()
+
+strip_tunique = NeoPixel(Pin(14), STRIP_LEN)
+strip_tunique.fill((0,0,0))
+strip_tunique.write()
 
 
-section_map = SectionMap()
-section_map.load_sections(SECTION_MAP, strip)
+section_map_robe = SectionMap()
+section_map_robe.load_sections(SECTION_MAP_ROBE, strip_robe)
+
+section_map_tunique = SectionMap()
+section_map_tunique.load_sections(SECTION_MAP_TUNIQUE, strip_tunique)
 
 received_color = (0,0,0)
 strip_color = (0,0,0)
@@ -34,8 +36,10 @@ for i in range(256):
 
 
 def cleanup():
-    strip.fill((0,0,0))
-    strip.write()
+    strip_robe.fill((0,0,0))
+    strip_robe.write()
+    strip_tunique.fill((0,0,0))
+    strip_tunique.write()
 
 
 def on_rx(v):  # v is what has been received
@@ -62,14 +66,20 @@ def update_color(color):
     print("Update Color:",color)
 
     # Shutdown all the sections
-    section_map.fill((0,0,0))      
+    section_map_robe.fill((0,0,0))
+    section_map_tunique.fill((0,0,0))
+          
     time.sleep(1)
 
-    first_section = section_map.sections[0]
+    first_section = section_map_robe.sections[0]
     first_section.set_color(color)   
     time.sleep(1)
  
-    for section in section_map.get_random_order():
+    for section in section_map_robe.get_random_order():
+        section.set_ramdom_color(color) 
+        time.sleep(.5)
+    
+    for section in section_map_tunique.get_random_order():
         section.set_ramdom_color(color) 
         time.sleep(.5)
 

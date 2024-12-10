@@ -6,7 +6,7 @@ import lib.ble_central as ble_central
 from machine import Pin, I2C
 from neopixel import NeoPixel
 
-status_pixel = NeoPixel(Pin(2), 1, bpp=3)
+# status_pixel = NeoPixel(Pin(2), 1, bpp=3)
 
 WAIT_FOR_RESPONSE = False
 TCS_READ_TIME_MS = 1000

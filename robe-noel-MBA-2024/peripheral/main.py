@@ -10,11 +10,11 @@ from section_map import SECTION_MAP_ROBE, SECTION_MAP_TUNIQUE
 
 STRIP_LEN = 20
 strip_robe = NeoPixel(Pin(15), STRIP_LEN)
-strip_robe.fill((0,0,0))
+strip_robe.fill((0,0,255))
 strip_robe.write()
 
 strip_tunique = NeoPixel(Pin(14), STRIP_LEN)
-strip_tunique.fill((0,0,0))
+strip_tunique.fill((0,0,255))
 strip_tunique.write()
 
 

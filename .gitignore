@@ -1,4 +1,5 @@
 .vscode
 .micropico
 *.code-workspace
+*.pyc
 pymakr.conf
